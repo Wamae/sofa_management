@@ -15,7 +15,10 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('account')->unique();
+            $table->string('account')->unique()->nullable();
+            $table->string('company_name');
+            $table->string('company_phone');
+            $table->string('company_address')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
