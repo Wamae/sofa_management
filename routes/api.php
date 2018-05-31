@@ -21,3 +21,6 @@ Route::resource('/accounts', 'AccountController');
 
 Route::resource('/customers', 'CustomerController');
 Route::get('/get_all_customers', 'CustomerController@getAllCustomers');
+
+Route::resource('/chair_types', 'ChairTypeController');
+Route::get('/get_all_chair_types', 'ChairTypeController@getAllChairTypes');
