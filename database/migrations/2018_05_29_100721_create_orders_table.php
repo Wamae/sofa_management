@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->integer('customer_id')->unsigned()->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('restrict')->onDelete('restrict');
             $table->float('amount');
+            $table->date('due_date');
             $table->integer('order_status_id')->unsigned()->nullable();
             $table->foreign('order_status_id')->references('id')->on('order_statuses')->onUpdate('restrict')->onDelete('restrict');
             $table->integer('created_by')->unsigned()->nullable();
