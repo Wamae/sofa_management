@@ -18,4 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('/accounts', 'AccountController');
-//Route::post('/create_account', 'AccountController@store');
+
+Route::resource('/customers', 'CustomerController');
+Route::get('/get_all_customers', 'CustomerController@getAllCustomers');
