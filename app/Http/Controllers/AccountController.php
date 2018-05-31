@@ -55,12 +55,12 @@ class AccountController extends Controller
             $account->save();
 
             $user = new User();
-            $user->name = $request->name;
-            $user->first_name = $request->first_name;
-            $user->last_name = $request->last_name;
-            $user->email = $request->email;
+            $user->name = ucwords(strtolower($request->name));
+            $user->first_name = ucwords(strtolower($request->first_name));
+            $user->last_name = ucwords(strtolower($request->last_name));
+            $user->email = strtolower($request->email);
             $user->phone = $request->phone;
-            $user->address = $request->address;
+            $user->address = ucwords(strtolower($request->address));
             $user->password = Hash::make($request->password);
 
             $user->save();
