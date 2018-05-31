@@ -27,3 +27,9 @@ Route::get('/get_all_chair_types', 'ChairTypeController@getAllChairTypes');
 
 Route::resource('/chairs', 'ChairController');
 Route::get('/get_all_chairs', 'ChairController@getAllChairs');
+
+Route::resource('/order_statuses', 'OrderStatusController');
+Route::get('/get_all_order_statuses', 'OrderStatusController@getAllOrderStatuses');
+
+Route::resource('/orders', 'OrderController');
+Route::get('/get_all_orders', 'OrderController@getAllOrders');
