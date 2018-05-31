@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Chair;
-use App\ChairType;
-use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ChairController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the chair.
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,7 +20,7 @@ class ChairController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new chair.
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,7 +30,7 @@ class ChairController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created chair in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -77,7 +74,7 @@ class ChairController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified chair.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -92,7 +89,7 @@ class ChairController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified chair.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -103,7 +100,7 @@ class ChairController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified chair in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
@@ -147,7 +144,7 @@ class ChairController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified chair from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
