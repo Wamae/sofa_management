@@ -161,7 +161,7 @@ class ChairController extends Controller
     public function getAllChairs(Request $request)
     {
         $accountId = $request->account_id;
-        $chairs = Chair::select(['chairs.id','chair',
+        $chairs = Chair::select(['chairs.id','chair','chair_type',
             DB::raw('CONCAT("'.url('').'"," ",image_url) AS image_url'),
             'chair_type','chair_type_id'])
             ->leftJoin('chair_types','chair_types.id','=','chairs.chair_type_id')
