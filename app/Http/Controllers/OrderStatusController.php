@@ -153,7 +153,11 @@ class OrderStatusController extends Controller
             ->where('account_id','=',$accountId)->get();
 
         if($orderStatuses->count() > 0){
-            return $orderStatuses;
+            return array(
+                'status' => 1,
+                'message' => "",
+                "data" => $orderStatuses
+            );
         }else{
             return array(
                 'status'=>1,

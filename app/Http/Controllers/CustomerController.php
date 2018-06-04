@@ -172,7 +172,11 @@ class CustomerController extends Controller
         $customers = Customer::select(['id', 'first_name', 'last_name', 'phone', 'email', 'address'])->where('account_id', '=', $accountId)->get();
 
         if ($customers->count() > 0) {
-            return $customers;
+            return array(
+                'status' => 1,
+                'message' => "",
+                "data" => $customers
+            );
         } else {
             return array(
                 'status' => 1,

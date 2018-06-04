@@ -158,7 +158,11 @@ class ChairTypeController extends Controller
             ->where('status','=',ACTIVE)->get();
 
         if($chairTypes->count() > 0){
-            return $chairTypes;
+            return array(
+                'status' => 1,
+                'message' => "",
+                "data" => $chairTypes
+            );
         }else{
             return array(
                 'status'=>1,

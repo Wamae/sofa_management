@@ -50,7 +50,7 @@ class ChairController extends Controller
             $chair = new Chair();
             $chair->chair = ucwords(strtolower($request->chair));
             //TODO: Upload and possibly resize image
-            $chair->image_url = "/chairs/sofa.png";
+            $chair->image_url = "/chairs/Sofa.jpeg";
             $chair->chair_type_id = $request->chair_type_id;
             $chair->account_id = $request->account_id;
             $chair->created_by = $request->created_by;
@@ -67,7 +67,7 @@ class ChairController extends Controller
         } else {
             return array(
                 'status' => 0,
-                'message' => 'Failed to create Chair!',
+                'message' => 'Failed to create Chair! '.$request->chair."|".$request->chair_type_id."|".$request->created_by,
                 'data' => $validator->getMessageBag()->toArray()
             );
         }
@@ -169,7 +169,11 @@ class ChairController extends Controller
             ->where('chairs.status','=',ACTIVE)->get();
 
         if($chairs->count() > 0){
-            return $chairs;
+            return array(
+                'status' => 1,
+                'message' => "",
+                "data" => $chairs
+            );
         }else{
             return array(
                 'status'=>1,

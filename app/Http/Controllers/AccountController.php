@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,9 +39,11 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO: make a transaction
         $result = false;
         DB::beginTransaction();
+
+        $account = null;
+        $user = null;
 
         try {
             $account = new Account();
@@ -62,6 +65,7 @@ class AccountController extends Controller
             $user->phone = $request->phone;
             $user->address = ucwords(strtolower($request->address));
             $user->password = Hash::make($request->password);
+            $user->account_id = $account->id;
 
             $user->save();
 
@@ -79,10 +83,11 @@ class AccountController extends Controller
         if ($result) {
 
             //TODO: Send an email and sms notification
+            $token = $user->createToken("MyApp")->accessToken;
 
-
-            return array("status" => $result, "type" => "error", "message" => "Account creation failed!",
-                "data" => array("account" => $account->account, "username" => $user->name)
+            return array("status" => $result, "type" => "success", "message" => "Account creation Successful!",
+                "data" => array("account" => $account->account, "username" => $user->name,"account_id"=>$account->id,
+                    "user_id"=>$user->id,"token"=>$token)
             );
         }
 
@@ -135,4 +140,21 @@ class AccountController extends Controller
     {
         //
     }
+
+    /**
+     * Login api
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request) {
+        if (Auth::attempt(["email" => request("user_name"), "password" => request("password")]) || Auth::attempt(["name" => request("user_name"), "password" => request("password")])) {
+            $user = Auth::user();
+            $token = $user->createToken("MyApp")->accessToken;
+            return response()->json(["status"=>1,"message"=>"Logged in successfully!","data" => array("user_id"=>$user->id,"account_id"=>$user->account_id,"token"=>$token)], 200);
+        } else {
+            return response()->json(["status" => 0,"message"=>"Unauthorized","data"=>null],401);
+        }
+    }
+
 }

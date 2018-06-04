@@ -198,7 +198,11 @@ class OrderController extends Controller
             ->get();
 
         if ($orders->count() > 0) {
-            return $orders;
+            return array(
+                'status' => 1,
+                'message' => "",
+                "data" => $orders
+            );
         } else {
             return array(
                 'status' => 1,
