@@ -60,7 +60,8 @@ class ChairController extends Controller
             if($result){
                 return array(
                     'status'=>1,
-                    'message'=>"Chair successfully created"
+                    'message'=>"Chair successfully created",
+                    'data'=>null
                 );
             }
 
@@ -130,7 +131,8 @@ class ChairController extends Controller
             if($result){
                 return array(
                     'status'=>1,
-                    'message'=>"Chair successfully updated"
+                    'message'=>"Chair successfully updated",
+                    'data'=>null
                 );
             }
 

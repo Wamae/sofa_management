@@ -55,7 +55,8 @@ class OrderStatusController extends Controller
             if($result){
                 return array(
                     'status'=>1,
-                    'message'=>"Order Status successfully created"
+                    'message'=>"Order Status successfully created",
+                    'data'=>null
                 );
             }
 
@@ -118,7 +119,8 @@ class OrderStatusController extends Controller
             if($result){
                 return array(
                     'status'=>1,
-                    'message'=>"Order Status successfully updated"
+                    'message'=>"Order Status successfully updated",
+                    'data'=>null
                 );
             }
 

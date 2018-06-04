@@ -69,7 +69,8 @@ class CustomerController extends Controller
                 //TODO::Send SMS notification
                 return array(
                     'status' => 1,
-                    'message' => "Customer successfully created"
+                    'message' => "Customer successfully created",
+                    'data'=>null
                 );
             }
 
@@ -138,7 +139,8 @@ class CustomerController extends Controller
             if ($result) {
                 return array(
                     'status' => 1,
-                    'message' => "Customer successfully updated"
+                    'message' => "Customer successfully updated",
+                    'data'=>null
                 );
             }
 

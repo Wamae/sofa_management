@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\OrderStatus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -44,7 +45,6 @@ class OrderController extends Controller
             'customer_id' => 'required|int',
             'amount' => 'required|numeric',
             'due_date' => 'required',
-            'order_status_id' => 'required|int',
             'account_id' => 'required|int',
             'created_by' => 'required|int'
         ]);
@@ -56,8 +56,8 @@ class OrderController extends Controller
             $order->chair_id = $request->chair_id;
             $order->customer_id = $request->customer_id;
             $order->amount = $request->amount;
-            $order->due_date = $request->due_date;
-            $order->order_status_id = $request->order_status_id;
+            $order->due_date = Carbon::parse($request->due_date)->format('Y-m-d');
+            $order->order_status_id = 1;
             $order->account_id = $request->account_id;
             $order->created_by = $request->created_by;
 
@@ -66,14 +66,15 @@ class OrderController extends Controller
             if ($result) {
                 return array(
                     'status' => 1,
-                    'message' => "Order successfully created"
+                    'message' => "Order successfully created",
+                    'data'=>null
                 );
             }
 
         } else {
             return array(
                 'status' => 0,
-                'message' => 'Failed to create Order!',
+                'message' => 'Failed to create Order!'.json_encode($validator->getMessageBag()->toArray()),
                 'data' => $validator->getMessageBag()->toArray()
             );
         }
@@ -150,7 +151,8 @@ class OrderController extends Controller
             if ($result) {
                 return array(
                     'status' => 1,
-                    'message' => "Order successfully updated"
+                    'message' => "Order successfully updated",
+                    'data'=>null
                 );
             }
 
