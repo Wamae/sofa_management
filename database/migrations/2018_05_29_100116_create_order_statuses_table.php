@@ -20,8 +20,6 @@ class CreateOrderStatusesTable extends Migration
             $table->foreign('created_by')->references('id')->on('users')->onUpdate('restrict')->onDelete('restrict');
             $table->integer('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users')->onUpdata('restrict')->onDelete('restrict');
-            $table->integer('account_id')->unsigned()->nullable();
-            $table->foreign('account_id')->references('id')->on('accounts')->onUpdata('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

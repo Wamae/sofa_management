@@ -151,8 +151,7 @@ class OrderStatusController extends Controller
     public function getAllOrderStatuses(Request $request)
     {
         $accountId = $request->account_id;
-        $orderStatuses = OrderStatus::select(['id','order_status'])
-            ->where('account_id','=',$accountId)->get();
+        $orderStatuses = OrderStatus::select(['id','order_status'])->get();
 
         if($orderStatuses->count() > 0){
             return array(

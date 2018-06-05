@@ -47,28 +47,44 @@ class ChairController extends Controller
 
         if ($validator->passes()) {
 
-            $chair = new Chair();
-            $chair->chair = ucwords(strtolower($request->chair));
-            //TODO: Upload and possibly resize image
-            $chair->image_url = "/chairs/Sofa.jpeg";
-            $chair->chair_type_id = $request->chair_type_id;
-            $chair->account_id = $request->account_id;
-            $chair->created_by = $request->created_by;
+            //$image = $request->file('chair_image');
+            $image = $_FILES['image_url']['tmp_name'];
+            $imagePath = public_path('uploads/chairs')."/temp.jpeg";
 
-            $result = $chair->save();
+            $uploadSuccess = move_uploaded_file($_FILES['image_url']['tmp_name'], $imagePath);
+            if($uploadSuccess){
+                $type =
+                $base64 = 'data:image/jpeg;base64,' .base64_encode(file_get_contents($imagePath));
+                $chair = new Chair();
+                $chair->chair = ucwords(strtolower($request->chair));
+                //TODO: Upload and possibly resize image
 
-            if($result){
+                $chair->image_url = $base64;
+                $chair->chair_type_id = $request->chair_type_id;
+                $chair->account_id = $request->account_id;
+                $chair->created_by = $request->created_by;
+
+                $result = $chair->save();
+
+                if ($result) {
+                    return array(
+                        'status' => 1,
+                        'message' => "Chair successfully created",
+                        'data' => null
+                    );
+                }
+            }else{
                 return array(
-                    'status'=>1,
-                    'message'=>"Chair successfully created",
-                    'data'=>null
+                    'status' => 0,
+                    'message' => "Failed to upload file!",
+                    'data' => null
                 );
             }
 
         } else {
             return array(
                 'status' => 0,
-                'message' => 'Failed to create Chair! '.$request->chair."|".$request->chair_type_id."|".$request->created_by,
+                'message' => 'Failed to create Chair! '.json_encode(array("chanir_type_id"=>$request->chair_type_id,"account_id"=>$request->account_id,"user_id"=>$request->created_by)),
                 'data' => $validator->getMessageBag()->toArray()
             );
         }
@@ -164,7 +180,7 @@ class ChairController extends Controller
     {
         $accountId = $request->account_id;
         $chairs = Chair::select(['chairs.id','chair','chair_type',
-            DB::raw('CONCAT("'.url('').'","",image_url) AS image_url'),
+            'image_url',
             'chair_type','chair_type_id'])
             ->leftJoin('chair_types','chair_types.id','=','chairs.chair_type_id')
             ->where('chairs.account_id','=',$accountId)
