@@ -67,7 +67,7 @@ class OrderController extends Controller
                 return array(
                     'status' => 1,
                     'message' => "Order successfully created",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -152,7 +152,7 @@ class OrderController extends Controller
                 return array(
                     'status' => 1,
                     'message' => "Order successfully updated",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -173,7 +173,20 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-
+        //$order = Order::where('id','=',$id);
+        if(Order::destroy($id)){
+            return array(
+                'status'=>1,
+                'message'=>"Order successfully removed",
+                'data'=>array()
+            );
+        }else{
+            return array(
+                'status'=>0,
+                'message'=>"Failed to remove order",
+                'data'=>array()
+            );
+        }
     }
 
     /**
@@ -197,6 +210,7 @@ class OrderController extends Controller
             ->leftJoin('chair_types', 'chair_types.id', '=', 'chairs.chair_type_id')
             ->leftJoin('customers', 'customers.id', '=', 'orders.customer_id')
             ->leftJoin('order_statuses', 'order_statuses.id', '=', 'orders.order_status_id')
+            //->whereNull('orders.')
             ->get();
 
         if ($orders->count() > 0) {
@@ -209,7 +223,7 @@ class OrderController extends Controller
             return array(
                 'status' => 1,
                 'message' => "No Orders created yet!",
-                "data" => null
+                "data" => array()
             );
         }
     }

@@ -56,7 +56,7 @@ class OrderStatusController extends Controller
                 return array(
                     'status'=>1,
                     'message'=>"Order Status successfully created",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -120,7 +120,7 @@ class OrderStatusController extends Controller
                 return array(
                     'status'=>1,
                     'message'=>"Order Status successfully updated",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -151,7 +151,7 @@ class OrderStatusController extends Controller
     public function getAllOrderStatuses(Request $request)
     {
         $accountId = $request->account_id;
-        $orderStatuses = OrderStatus::select(['id','order_status'])->get();
+        $orderStatuses = OrderStatus::select(['id','order_status'])->orderBy('id','ASC')->get();
 
         if($orderStatuses->count() > 0){
             return array(
@@ -163,7 +163,7 @@ class OrderStatusController extends Controller
             return array(
                 'status'=>1,
                 'message'=>"No Order Statuses created yet!",
-                "data"=>null
+                "data"=>array()
             );
         }
     }

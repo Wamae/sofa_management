@@ -153,7 +153,7 @@ class AccountController extends Controller
             $token = $user->createToken("MyApp")->accessToken;
             return response()->json(["status"=>1,"message"=>"Logged in successfully!","data" => array("user_id"=>$user->id,"account_id"=>$user->account_id,"token"=>$token)], 200);
         } else {
-            return response()->json(["status" => 0,"message"=>"Unauthorized","data"=>null],401);
+            return response()->json(["status" => 0,"message"=>"Unauthorized","data"=>array()],401);
         }
     }
 

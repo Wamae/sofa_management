@@ -70,7 +70,7 @@ class CustomerController extends Controller
                 return array(
                     'status' => 1,
                     'message' => "Customer successfully created",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -140,7 +140,7 @@ class CustomerController extends Controller
                 return array(
                     'status' => 1,
                     'message' => "Customer successfully updated",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -183,7 +183,7 @@ class CustomerController extends Controller
             return array(
                 'status' => 1,
                 'message' => "No customers created yet!",
-                "data" => null
+                "data" => array()
             );
         }
     }

@@ -58,7 +58,7 @@ class ChairTypeController extends Controller
                 return array(
                     'status'=>1,
                     'message'=>"Chair Type successfully created",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -124,7 +124,7 @@ class ChairTypeController extends Controller
                 return array(
                     'status'=>1,
                     'message'=>"Chair Type successfully updated",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -169,7 +169,7 @@ class ChairTypeController extends Controller
             return array(
                 'status'=>1,
                 'message'=>"No Chair Types created yet!",
-                "data"=>null
+                "data"=>array()
             );
         }
     }

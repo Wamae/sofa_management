@@ -70,14 +70,14 @@ class ChairController extends Controller
                     return array(
                         'status' => 1,
                         'message' => "Chair successfully created",
-                        'data' => null
+                        'data' => array()
                     );
                 }
             }else{
                 return array(
                     'status' => 0,
                     'message' => "Failed to upload file!",
-                    'data' => null
+                    'data' => array()
                 );
             }
 
@@ -148,7 +148,7 @@ class ChairController extends Controller
                 return array(
                     'status'=>1,
                     'message'=>"Chair successfully updated",
-                    'data'=>null
+                    'data'=>array()
                 );
             }
 
@@ -196,7 +196,7 @@ class ChairController extends Controller
             return array(
                 'status'=>1,
                 'message'=>"No Chairs created yet!",
-                "data"=>null
+                "data"=>array()
             );
         }
     }
