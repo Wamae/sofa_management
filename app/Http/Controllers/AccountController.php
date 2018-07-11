@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use JWTAuth;
 
 class AccountController extends Controller
 {
+
+    public function __construct() { $this->middleware('jwt.auth'); }
+
     /**
      * Display a listing of the resource.
      *
@@ -150,7 +154,8 @@ class AccountController extends Controller
     public function login(Request $request) {
         if (Auth::attempt(["email" => request("user_name"), "password" => request("password")]) || Auth::attempt(["name" => request("user_name"), "password" => request("password")])) {
             $user = Auth::user();
-            $token = $user->createToken("MyApp")->accessToken;
+            //$token = $user->createToken("MyApp")->accessToken;
+            $token = JWTAuth::fromUser($user);
             return response()->json(["status"=>1,"message"=>"Logged in successfully!","data" => array("user_id"=>$user->id,"account_id"=>$user->account_id,"token"=>$token)], 200);
         } else {
             return response()->json(["status" => 0,"message"=>"Unauthorized","data"=>array()],401);

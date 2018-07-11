@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderStatusController extends Controller
 {
+
+    public function __construct() { $this->middleware('jwt.auth'); }
+
     /**
      * Display a listing of the order status.
      *

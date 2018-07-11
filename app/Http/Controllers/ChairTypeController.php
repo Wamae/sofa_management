@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ChairTypeController extends Controller
 {
+
+    public function __construct() { $this->middleware('jwt.auth'); }
+
     /**
      * Display a listing of the resource.
      *

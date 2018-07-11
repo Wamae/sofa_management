@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
+
+    public function __construct() { $this->middleware('jwt.auth'); }
+
     /**
      * Display a listing of the order.
      *

@@ -35,3 +35,11 @@ Route::get('/get_all_order_statuses', 'OrderStatusController@getAllOrderStatuses
 
 Route::resource('/orders', 'OrderController');
 Route::get('/get_all_orders', 'OrderController@getAllOrders');
+
+
+/*Route::post('user/register', 'APIRegisterController@register');
+Route::post('user/login', 'APILoginController@login');
+
+Route::middleware('jwt.auth')->get('users', function(Request $request) {
+    return auth()->user();
+});*/
