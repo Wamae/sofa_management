@@ -74,7 +74,7 @@ class OrderController extends Controller
         } else {
             return array(
                 'status' => 0,
-                'message' => 'Failed to create Order!'.json_encode($validator->getMessageBag()->toArray()),
+                'message' => 'Failed to create Order!'.$request->chair_id,
                 'data' => $validator->getMessageBag()->toArray()
             );
         }
@@ -173,7 +173,6 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //$order = Order::where('id','=',$id);
         if(Order::destroy($id)){
             return array(
                 'status'=>1,
@@ -183,7 +182,7 @@ class OrderController extends Controller
         }else{
             return array(
                 'status'=>0,
-                'message'=>"Failed to remove order",
+                'message'=>"Failed to remove order!".$id,
                 'data'=>array()
             );
         }

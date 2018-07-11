@@ -36,8 +36,13 @@ class OrderStatusController extends Controller
      */
     public function store(Request $request)
     {
+        return array(
+            'status'=>1,
+            'message'=>"Not allowed!",
+            'data'=>array()
+        );
 
-        $validator = Validator::make($request->all(), [
+ /*       $validator = Validator::make($request->all(), [
             'order_status' => 'required',
             'account_id' => 'required|int',
             'created_by'=>'required|int'
@@ -66,7 +71,7 @@ class OrderStatusController extends Controller
                 'message' => 'Failed to create Order Status!',
                 'data' => $validator->getMessageBag()->toArray()
             );
-        }
+        }*/
     }
 
     /**
@@ -141,7 +146,24 @@ class OrderStatusController extends Controller
      */
     public function destroy($id)
     {
-
+        return array(
+            'status'=>1,
+            'message'=>"Not allowed!",
+            'data'=>array()
+        );
+        /*if(OrderStatus::destroy($id)){
+            return array(
+                'status'=>1,
+                'message'=>"Order status successfully removed",
+                'data'=>array()
+            );
+        }else{
+            return array(
+                'status'=>0,
+                'message'=>"Failed to remove order status!",
+                'data'=>array()
+            );
+        }*/
     }
 
     /**
@@ -150,7 +172,6 @@ class OrderStatusController extends Controller
      */
     public function getAllOrderStatuses(Request $request)
     {
-        $accountId = $request->account_id;
         $orderStatuses = OrderStatus::select(['id','order_status'])->orderBy('id','ASC')->get();
 
         if($orderStatuses->count() > 0){

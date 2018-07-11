@@ -84,7 +84,7 @@ class ChairController extends Controller
         } else {
             return array(
                 'status' => 0,
-                'message' => 'Failed to create Chair! '.json_encode(array("chanir_type_id"=>$request->chair_type_id,"account_id"=>$request->account_id,"user_id"=>$request->created_by)),
+                'message' => 'Failed to create Chair! '.json_encode(array("chair_type_id"=>$request->chair_type_id,"account_id"=>$request->account_id,"user_id"=>$request->created_by)),
                 'data' => $validator->getMessageBag()->toArray()
             );
         }
@@ -169,7 +169,19 @@ class ChairController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Chair::destroy($id)){
+            return array(
+                'status'=>1,
+                'message'=>"Chair successfully removed",
+                'data'=>array()
+            );
+        }else{
+            return array(
+                'status'=>0,
+                'message'=>"Failed to remove chair!".$id,
+                'data'=>array()
+            );
+        }
     }
 
     /**

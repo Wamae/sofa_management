@@ -161,7 +161,19 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Customer::destroy($id)){
+            return array(
+                'status'=>1,
+                'message'=>"Customer successfully removed",
+                'data'=>array()
+            );
+        }else{
+            return array(
+                'status'=>0,
+                'message'=>"Failed to remove order!".$id,
+                'data'=>array()
+            );
+        }
     }
 
     /**

@@ -145,7 +145,19 @@ class ChairTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(ChairType::destroy($id)){
+            return array(
+                'status'=>1,
+                'message'=>"Chair type successfully removed",
+                'data'=>array()
+            );
+        }else{
+            return array(
+                'status'=>0,
+                'message'=>"Failed to remove chair type status!",
+                'data'=>array()
+            );
+        }
     }
 
     /**

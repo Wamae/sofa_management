@@ -21,6 +21,7 @@ class CreateOrderStatusesTable extends Migration
             $table->integer('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users')->onUpdata('restrict')->onDelete('restrict');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -28,6 +28,7 @@ class CreateCustomersTable extends Migration
             $table->integer('account_id')->unsigned();
             $table->foreign('account_id')->references('id')->on('accounts')->onUpdata('restrict')->onDelete('restrict');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
